@@ -2,10 +2,8 @@ import re
 from pathlib import Path
 
 def pre_processar(CAMINHO_ARQUIVO_C, CAMINHO_BIBLI_PADRAO):
-  
   with open(CAMINHO_ARQUIVO_C, "r") as arquivo:
       codigo_linha = arquivo.readlines()
-  
   
   #expansao dos includes
   for x in range(len(codigo_linha)):
@@ -60,7 +58,8 @@ def pre_processar(CAMINHO_ARQUIVO_C, CAMINHO_BIBLI_PADRAO):
   comments = r'/\*(.*?)\*/'
   codigo = re.sub(comments, '', codigo, flags=re.DOTALL)
   
-  codigo = codigo.replace(" =", "=").replace("= ", "=")
+  codigo = codigo.replace(" =", "=").replace("= ", "=").replace("+ ", '+').replace(" +", '+').replace(" -", '-').replace("- ", '-').replace("{ ", "{").replace(" {", "{").replace("} ", "}").replace(" }", "}").replace("( ", "(").replace(" (", "(").replace(") ", ")").replace(" )", ")").replace("; ", ";")
+
   codigo_linha = codigo.split('\n')
   
   for x in range(len(codigo_linha)):
